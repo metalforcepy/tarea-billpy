@@ -1,28 +1,13 @@
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import ProductRow from "./ProductRow";
 
-export default function ProductTable({ products, setProducts }) {
-  const addProduct = () => {
-    setProducts([
-      ...products,
-      { id: Date.now(), descripcion: "", cantidad: 1, precio: 0 },
-    ]);
-  };
-
-  const updateProduct = (index, updated) => {
-    const newList = [...products];
-    newList[index] = updated;
-    setProducts(newList);
-  };
-
-  const deleteProduct = (index) => {
-    setProducts(products.filter((_, i) => i !== index));
-  };
-
+export default function ProductTable({ products, onAdd, onDelete, onChange }) {
   return (
-    <div className="product-table">
+    <div className="product-table-container">
       <table>
         <thead>
           <tr>
+            <th style={{ width: '40px' }}></th>
             <th>Descripción</th>
             <th>Cantidad</th>
             <th>Precio</th>
@@ -31,19 +16,25 @@ export default function ProductTable({ products, setProducts }) {
           </tr>
         </thead>
         <tbody>
-          {products.map((item, i) => (
-            <ProductRow
-              key={item.id}
-              item={item}
-              onChange={(updated) => updateProduct(i, updated)}
-              onDelete={() => deleteProduct(i)}
-            />
-          ))}
+          <SortableContext items={products.map(p => p.id)} strategy={verticalListSortingStrategy}>
+            {products.map((item) => (
+              <ProductRow
+                key={item.id}
+                item={item}
+                onChange={onChange}
+                onDelete={onDelete}
+              />
+            ))}
+          </SortableContext>
         </tbody>
       </table>
-      <button className="add-btn" onClick={addProduct}>
-        + Agregar producto
-      </button>
+      {products.length === 0 && (
+        <div className="empty-state">
+          <p>Aún no hay productos en la factura.</p>
+          <p>¡Añade el primero!</p>
+        </div>
+      )}
+      <button onClick={onAdd} className="btn-add">Añadir Producto</button>
     </div>
   );
 }

@@ -1,0 +1,92 @@
+.invoice-template {
+    width: 210mm;
+    /* Ancho de A4 */
+    padding: 20mm;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: white;
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #4f46e5;
+    padding-bottom: 15px;
+}
+
+.invoice-header h1 {
+    margin: 0;
+    color: #4f46e5;
+    font-size: 2.5rem;
+}
+
+.invoice-details {
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.client-info {
+    margin: 30px 0;
+}
+
+.client-info h2 {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.products-table th,
+.products-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.products-table th {
+    font-weight: 600;
+    color: #111827;
+}
+
+.products-table td:nth-child(2),
+.products-table th:nth-child(2) {
+    text-align: center;
+}
+
+.products-table td:nth-child(3),
+.products-table th:nth-child(3) {
+    text-align: right;
+}
+
+.products-table td:nth-child(4),
+.products-table th:nth-child(4) {
+    text-align: right;
+    font-weight: 600;
+}
+
+.invoice-footer {
+    margin-top: 40px;
+    text-align: right;
+}
+
+.total-section {
+    font-size: 1.5rem;
+    color: #4f46e5;
+    margin-bottom: 20px;
+}
+
+.total-section strong {
+    margin-right: 20px;
+}
+
+.thank-you-message {
+    font-style: italic;
+    color: #6b7280;
+}
