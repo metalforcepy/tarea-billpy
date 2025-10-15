@@ -7,6 +7,7 @@ export default function ClientForm({ client, setClient }) {
         value={client}
         placeholder="Nombre del cliente"
         onChange={(e) => setClient(e.target.value)}
+        maxLength="7"
       />
     </div>
   );

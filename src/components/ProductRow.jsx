@@ -1,10 +1,12 @@
+// src/components/ProductRow.jsx (Sin contador de caracteres)
+
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import React from 'react';
 
 const DragHandle = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ cursor: 'grab' }}>
-    <path d="M5 10H7M5 14H7M11 10H13M11 14H13M17 10H19M17 14H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  <svg width="24" height="24" viewBox="0 0 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ cursor: 'grab' }}>
+    <path d="M5 10H7M5 14H7M11 10H13M11 14H13M17 10H19M17 14H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
   </svg>
 );
 
@@ -26,20 +28,32 @@ export default function ProductRow({ item, onChange, onDelete }) {
   };
 
   const handleChange = (field, value) => {
+    if (field === 'precio' && String(value).length > 9) { return; }
+    if (field === 'cantidad' && String(value).length > 4) { return; }
     onChange(item.id, { [field]: value });
   };
-
+  
   const subtotal = (item.cantidad || 0) * (item.precio || 0);
+  const charLimit = 40;
 
   return (
     <tr ref={setNodeRef} style={style} className={`product-row ${isDragging ? 'is-dragging' : ''}`}>
       <td className="drag-handle" {...attributes} {...listeners}>
         <DragHandle />
       </td>
-
+      
+      {/* --- SECCIÓN MODIFICADA --- */}
       <td data-label="Descripción">
-        <input type="text" value={item.descripcion} onChange={(e) => handleChange("descripcion", e.target.value)} />
+        {/* Ya no tiene el div "description-cell" ni el span "char-counter" */}
+        <input 
+          type="text" 
+          value={item.descripcion} 
+          onChange={(e) => handleChange("descripcion", e.target.value)}
+          maxLength={charLimit}
+        />
       </td>
+      {/* --- FIN DE LA SECCIÓN MODIFICADA --- */}
+      
       <td data-label="Cantidad">
         <input type="number" min="0" value={item.cantidad} onChange={(e) => handleChange("cantidad", Number(e.target.value))} />
       </td>
