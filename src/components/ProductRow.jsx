@@ -1,5 +1,3 @@
-// src/components/ProductRow.jsx (Sin contador de caracteres)
-
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import React from 'react';
@@ -42,9 +40,9 @@ export default function ProductRow({ item, onChange, onDelete }) {
         <DragHandle />
       </td>
       
-      {/* --- SECCIÓN MODIFICADA --- */}
+      {}
       <td data-label="Descripción">
-        {/* Ya no tiene el div "description-cell" ni el span "char-counter" */}
+        {}
         <input 
           type="text" 
           value={item.descripcion} 
@@ -52,7 +50,7 @@ export default function ProductRow({ item, onChange, onDelete }) {
           maxLength={charLimit}
         />
       </td>
-      {/* --- FIN DE LA SECCIÓN MODIFICADA --- */}
+      {}
       
       <td data-label="Cantidad">
         <input type="number" min="0" value={item.cantidad} onChange={(e) => handleChange("cantidad", Number(e.target.value))} />

@@ -87,6 +87,11 @@ function App() {
       alert("Por favor, ingrese el nombre del cliente.");
       return;
     }
+
+    if (products.length === 0) {
+    alert("No se puede emitir una factura sin productos. Por favor, añade al menos uno.");
+    return;
+  }
     const invoiceToPrint = document.getElementById('invoice-to-print');
     html2canvas(invoiceToPrint, { scale: 2 }).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
@@ -172,7 +177,8 @@ function App() {
                     onDelete={deleteProduct}
                     onChange={updateProduct}
                   />
-                  <Summary total={total} onEmit={handleEmit} />
+                  <Summary total={total} onEmit={handleEmit} 
+                  hasProducts={products.length > 0}/>
                 </motion.div>
               )}
             </AnimatePresence>
